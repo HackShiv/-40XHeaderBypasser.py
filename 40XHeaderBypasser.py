@@ -6,7 +6,6 @@ import re
 requests.packages.urllib3.disable_warnings()
 
 def extract_url(line):
-    # Use regex to find a valid URL
     url_regex = r'(https?://\S+)'
     match = re.search(url_regex, line)
     if match:
