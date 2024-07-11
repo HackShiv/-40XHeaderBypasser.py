@@ -3,7 +3,6 @@ import requests
 import sys
 import re
 
-# Disable insecure request warnings
 requests.packages.urllib3.disable_warnings()
 
 def extract_url(line):
@@ -61,7 +60,6 @@ def main():
             print(f'[!] Invalid URL format: {line}')
             continue
 
-        # Determine if the URL uses http or https
         if url.startswith('http://'):
             method = 'http'
             url = url[len('http://'):]
