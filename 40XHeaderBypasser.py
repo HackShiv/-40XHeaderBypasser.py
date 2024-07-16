@@ -2,6 +2,8 @@
 import requests
 import sys
 import re
+import random
+import time
 
 requests.packages.urllib3.disable_warnings()
 
@@ -26,11 +28,15 @@ def test_url(url, method):
 
     results = []
 
+    
+    user_agent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+    accept_header = 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3'
+
     for x in x_headers:
         header = {
-             'Accept'           : 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+             'Accept'           : accept_header,
              'Cache-Control'    : 'no-cache',
-             'User-Agent'       : 'Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101 Firefox/1337.0',
+             'User-Agent'       : user_agent,
              'Connection'       : 'close',
              x : url
         }
@@ -38,6 +44,8 @@ def test_url(url, method):
         try:
             res = requests.get('{}://{}'.format(method, url), headers=header, timeout=3, verify=False)
             results.append({'header': x, 'status_code': res.status_code, 'response_size': len(res.text)})
+           
+            time.sleep(random.uniform(1, 3))
         except requests.exceptions.RequestException as e:
             results.append({'header': x, 'status_code': 'Error', 'response_size': 0})
 
