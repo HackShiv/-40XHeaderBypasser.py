@@ -24,6 +24,8 @@ def test_url(url, method):
         'X-Client-IP',
         'X-Host',
         'X-Forwared-Host',
+        'X-Original-URL',
+        'X-Rewrite-URL'    
     ]
 
     results = []
